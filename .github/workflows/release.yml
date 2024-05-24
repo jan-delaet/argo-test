@@ -1,0 +1,23 @@
+name: Release
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - prerelease
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  security-events: write
+  actions: read
+
+jobs:
+  release:
+    uses: dexmach-enterprise-nfr/reusable-workflows/.github/workflows/release-docker.yaml@main
+    with:
+      DOCKER_PROJECT_NAME: ${{ vars.DOCKER_PROJECT_NAME }}
+      DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
+    secrets: inherit
