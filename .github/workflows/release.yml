@@ -1,11 +1,11 @@
-name: Release
+name: Semantic Release - Docker
 
 on:
   workflow_dispatch:
-  # push:
-  #   branches:
-  #     - main
-  #     - prerelease
+  push:
+    branches:
+      - main
+      - prerelease
 
 permissions:
   contents: write
@@ -18,6 +18,12 @@ jobs:
   release:
     uses: dexmach-enterprise-nfr/reusable-workflows/.github/workflows/release-docker.yaml@main
     with:
-      DOCKER_PROJECT_NAME: ${{ vars.DOCKER_PROJECT_NAME }}
-      DOCKER_IMAGE_NAME: ${{ vars.DOCKER_IMAGE_NAME }}
-    secrets: inherit
+      container-registry-endpoint: ${{ vars.REGISTRY_ENDPOINT }}
+      container-project-name: ${{ vars.DOCKER_PROJECT_NAME }}
+      container-image-name: ${{ vars.DOCKER_IMAGE_NAME }}
+      trivy-config-path: trivy.yaml
+    secrets:
+      acr-application-id: ${{ secrets.ACR_APPLICATION_ID }}
+      acr-application-secret: ${{ secrets.ACR_APPLICATION_SECRET }}
+      semantic-release-bot-app-id:  ${{ secrets.SEMANTIC_RELEASE_BOT_APP_ID }}
+      semantic-release-bot-private-key: ${{ secrets.SEMANTIC_RELEASE_BOT_PRIVATE_KEY }}
