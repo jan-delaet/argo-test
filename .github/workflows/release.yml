@@ -2,10 +2,10 @@ name: Release
 
 on:
   workflow_dispatch:
-  push:
-    branches:
-      - main
-      - prerelease
+  # push:
+  #   branches:
+  #     - main
+  #     - prerelease
 
 permissions:
   contents: write

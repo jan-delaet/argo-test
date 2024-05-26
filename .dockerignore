@@ -1,0 +1,7 @@
+__pycache__
+.github
+.venv
+.dockerignore
+.gitignore
+release.config.js
+README.md

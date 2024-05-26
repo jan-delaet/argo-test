@@ -3,3 +3,8 @@
 # Example:
 # /path/to/file @username
 # END: Code Owners
+
+Dockerfile @jan-delaet
+*.py @jan-delaet
+*.js @jan-delaet
+*.y[a]ml @steini44as

@@ -1,0 +1,37 @@
+name: Release with Composite Action
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+      - prerelease
+
+permissions:
+  contents: write
+  issues: write
+  pull-requests: write
+  security-events: write
+  actions: read
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trivy scan
+        uses: dexmach-enterprise-nfr/action-composite-trivy-scan@v1
+        with:
+          container-registry-endpoint: ${{ vars.REGISTRY_ENDPOINT }}
+          container-project-name: ${{ vars.DOCKER_PROJECT_NAME }}
+          container-image-name: ${{ vars.DOCKER_IMAGE_NAME }}
+          trivy-config-path: trivy.yaml
+      - name: Release
+        uses: dexmach-enterprise-nfr/action-composite-semantic-release@v1
+        with:
+          container-project-name: ${{ vars.DOCKER_PROJECT_NAME }}
+          container-image-name: ${{ vars.DOCKER_IMAGE_NAME }}
+          container-registry-endpoint: ${{ vars.REGISTRY_ENDPOINT }}
+          container-registry-username: ${{ secrets.ACR_APPLICATION_ID }}
+          container-registry-password: ${{ secrets.ACR_APPLICATION_SECRET}}
+          semantic-release-bot-app-id: ${{ secrets.SEMANTIC_RELEASE_BOT_APP_ID }}
+          semantic-release-bot-private-key: ${{ secrets.SEMANTIC_RELEASE_BOT_PRIVATE_KEY }}
