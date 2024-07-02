@@ -8,7 +8,7 @@ applicationName: "test-app"
 replicaCount: 2
 
 image:
-  repository: acrjdltest02.azurecr.io/octocat"
+  repository: acrjdltest02.azurecr.io/octocat
   pullPolicy: Always
   # Overrides the image tag whose default is the chart appVersion.
   tag: "1.0.0"
@@ -136,11 +136,11 @@ autoscaling:
 
 # https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
 # Uncomment this section to set tolerations for the pods.
-# tolerations:
-#   - key: "CriticalAddonsOnly"
-#     operator: "Equal"
-#     value: "True"
-#     effect: "NoSchedule"
+tolerations:
+  - key: "CriticalAddonsOnly"
+    operator: "Equal"
+    value: "True"
+    effect: "NoSchedule"
 
 # https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity
 # Uncomment this section to set affinity for the pods.
