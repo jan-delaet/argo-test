@@ -139,7 +139,7 @@ autoscaling:
 tolerations:
   - key: "CriticalAddonsOnly"
     operator: "Equal"
-    value: "True"
+    value: "true"
     effect: "NoSchedule"
 
 # https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity
