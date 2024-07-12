@@ -1,9 +1,10 @@
-apiVersion: helm.toolkit.fluxcd.io/v2beta1
+apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: argo-test-dev
 spec:
   releaseName: argo-test-dev
+  targetNamespace: argo-test-dev
   chart:
     spec:
       chart: helm-standard-webapp
