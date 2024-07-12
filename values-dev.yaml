@@ -1,0 +1,175 @@
+# Default values for app.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+# The name of the application. Will be used for resource names, labels and selectors.
+applicationName: ""
+
+replicaCount: 2
+
+image:
+  repository: ""
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: ""
+
+# https://kubernetes.io/docs/tasks/configure-pod-container/pull-image-private-registry/
+imagePullSecrets: []
+
+# https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/
+serviceAccount:
+  create: true
+  # The name of the service account to use. If not set, the application name will be used.
+  name: ""
+  # Uncomment this section to set labels for the service account.
+  # labels:
+  #   azure.workload.identity/use: "true"
+  # Uncomment this section to set annotations for the service account.
+  # annotations:
+  #   azure.workload.identity/client-id: ""
+
+# https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+# Uncomment this section to set labels for the pods.
+# podLabels:
+#   azure.workload.identity/use: "true"
+
+# https://kubernetes.io/docs/concepts/overview/working-with-objects/annotations/
+# Uncomment this section to set annotations for the pods.
+# podAnnotations:
+#   azure.workload.identity/inject-proxy-sidecar: "true"
+
+# https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-pod
+# Uncomment this section to set the security context for the pods.
+# podSecurityContext:
+#   runAsNonRoot: true
+
+# https://kubernetes.io/docs/tasks/configure-pod-container/security-context/#set-the-security-context-for-a-container
+# Uncomment this section to set the security context for the container.
+# securityContext:
+#   capabilities:
+#     drop:
+#       - ALL
+#   readOnlyRootFilesystem: true
+#   runAsNonRoot: true
+#   # runAsUser: 1000
+
+# https://kubernetes.io/docs/concepts/services-networking/service/
+service:
+  type: ClusterIP
+  port: 8080
+  containerPort: 8080
+
+# https://kubernetes.io/docs/concepts/storage/persistent-volumes/
+# Uncomment this section to enable volumes for this application.
+# volumes:
+#   - name: example_volume
+#     storageClassName: ""
+#     storageRequest: 100Gi
+#     accessModes:
+#       - ReadWriteOnce
+#     emptyDir: {}
+
+# https://kubernetes.io/docs/concepts/storage/volumes/
+# Uncomment this section to enable volume mounts for this application.
+# volumeMounts:
+#   - name: example_volume
+#     mountPath: /tmp/vol
+#     readOnly: true
+
+# https://kubernetes.io/docs/concepts/configuration/configmap/
+environment:
+  enabled: false
+# Uncomment this section and set environment.enabled to true to enable environment variables for this application.
+#   values:
+#     EXAMPLE_ENV_VAR: "example"
+
+# https://secrets-store-csi-driver.sigs.k8s.io/concepts.html
+secrets:
+  enabled: false
+# Uncomment this section and set secrets.enabled to true to enable secret integration with Azure Key Vault for this application.
+# managedIdentity:
+#   clientId: "AZURE_MI_CLIENT_ID"
+#   tenantId: "AZURE_TENANT_ID"
+# keyvaultName: "AZURE_KEYVAULT_NAME"
+# prefix: dev # prefix for the secret identifiers in Azure Key Vault. Will be removed from the Kubernetes secret reference itself.
+# values:
+#     EXAMPLE_SECRET: "" # Provide the version for the secret if required, or leave empty quotes for the latest version.
+
+# https://kubernetes.io/docs/concepts/services-networking/ingress/
+ingress:
+  enabled: false
+# Uncomment this section and set ingress.enabled to true to enable Ingress for this application.
+#   className: "nginx-pub"
+#   hosts:
+#     - host: demoapp.example.com
+#       paths:
+#         - path: /
+#           pathType: Prefix
+#   tls:
+#     - secretName: demoapp-example-com-tls
+#       hosts:
+#         - demoapp.example.com
+
+# https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/
+# Uncomment this section to set resource requests and limits. Request configuration is required for HorizontalPodAutoscaler to work correctly.
+# resources:
+#   limits:
+#     cpu: 100m
+#     memory: 128Mi
+#   requests:
+#     cpu: 100m
+#     memory: 128Mi
+
+# https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/
+autoscaling:
+  enabled: false
+# Uncomment this section and set autoscaling.enabled to true to enable autoscaling through HorizontalPodAutoscaler.
+#   minReplicas: 2
+#   maxReplicas: 5
+#   targetCPUUtilizationPercentage: 75
+#   targetMemoryUtilizationPercentage: 75
+
+# https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+# Uncomment this section to specify node selector labels for the pods.
+# nodeSelector:
+#   kubernetes.io/os: linux
+
+# https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/
+# Uncomment this section to set tolerations for the pods.
+# tolerations:
+#   - key: "CriticalAddonsOnly"
+#     operator: "Equal"
+#     value: "True"
+#     effect: "NoSchedule"
+
+# https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/#affinity-and-anti-affinity
+# Uncomment this section to set affinity for the pods.
+# affinity: {}
+
+# https://kubernetes.io/docs/concepts/workloads/controllers/cron-jobs/
+# Uncomment this section to add cronjobs associated with the application.
+# cronJobs:
+#   - name: "example-job"
+#     containerName: "example-container"
+#     schedule: "5 4 * * *" # https://crontab.guru
+#     image: "nginx:latest"
+#     imagePullPolicy: "IfNotPresent"
+#     command:
+#       - echo
+#     args:
+#       - "hello world!"
+#     restartPolicy: OnFailure
+#     podSecurityContext:
+#       runAsNonRoot: true
+#     securityContext:
+#       capabilities:
+#         drop:
+#           - ALL
+#       readOnlyRootFilesystem: false
+#       runAsNonRoot: false
+
+# https://github.com/kubernetes/autoscaler/tree/master/vertical-pod-autoscaler
+verticalPodAutoScaling:
+  enabled: false
+# Uncomment this section and set verticalPodAutoScaling.enabled to true to enable the vertical pod autoscaling recommendations for the pods.
+#   UpdateMode: "Off"
