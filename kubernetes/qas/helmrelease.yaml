@@ -66,5 +66,5 @@ spec:
     tolerations:
       - key: CriticalAddonsOnly
         operator: Equal
-        value: "True"
+        value: "true"
         effect: NoSchedule
