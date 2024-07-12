@@ -1,0 +1,66 @@
+apiVersion: helm.toolkit.fluxcd.io/v2beta1
+kind: HelmRelease
+metadata:
+  name: argo-test-qas
+spec:
+  releaseName: argo-test-qas
+  chart:
+    spec:
+      chart: helm-standard-webapp
+      version: "v1.0.x"
+      sourceRef:
+        kind: HelmRepository
+        name: aperam
+        namespace: flux-system
+  interval: 30m
+  install:
+    remediation:
+      retries: 3
+  values:
+    image:
+      repository: "acrjdlsharedpoc01.azurecr.io/argo-test"
+      tag: "1.0.0"
+      pullPolicy: Always
+    serviceAccount:
+      create: true
+      name: ""
+    service:
+      type: ClusterIP
+      port: 8000
+      containerPort: 8000
+    environment:
+      enabled: false
+    secrets:
+      enabled: false
+    ingress:
+      enabled: true
+      className: nginx-pub
+      hosts:
+        - host: argo-test.qas.delaet.dev
+          paths:
+            - path: /
+              pathType: Prefix
+      tls:
+        - secretName: argo-test-qas-delaet-dev-tls
+          hosts:
+            - argo-test.qas.delaet.dev
+    resources:
+      limits:
+        cpu: 100m
+        memory: 128Mi
+      requests:
+        cpu: 100m
+        memory: 128Mi
+
+    autoscaling:
+      enabled: true
+      minReplicas: 2
+      maxReplicas: 5
+      targetCPUUtilizationPercentage: 75
+      targetMemoryUtilizationPercentage: 75
+
+    tolerations:
+      - key: CriticalAddonsOnly
+        operator: Equal
+        value: "True"
+        effect: NoSchedule
