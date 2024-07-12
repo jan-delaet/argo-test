@@ -2,6 +2,7 @@ apiVersion: helm.toolkit.fluxcd.io/v2
 kind: HelmRelease
 metadata:
   name: argo-test-dev
+  namespace: argo-test-dev
 spec:
   releaseName: argo-test-dev
   targetNamespace: argo-test-dev
