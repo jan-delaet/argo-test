@@ -22,8 +22,8 @@ spec:
     applicationName: argo-test
     replicaCount: 2
     image:
-      repository: "acrjdlsharedpoc01.azurecr.io/argo-test"
-      tag: "1.0.0"
+      repository: "acrjdlsharedpoc01.azurecr.io/argo-test" # {"$imagepolicy": "argo-test-dev:argo-test-dev:name"}
+      tag: "1.0.0" # {"$imagepolicy": "argo-test-dev:argo-test-dev:tag"}
       pullPolicy: Always
     serviceAccount:
       create: true
