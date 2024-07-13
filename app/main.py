@@ -41,3 +41,8 @@ def show_octocat_hulatocat():
 @app.route("/nothing-here")
 def show_image():
     return "<img src='https://media.giphy.com/media/3o7TKz9bX9v9Kz2wvO/giphy.gif'>"
+
+
+@app.route("/french")
+def show_french():
+    return "Bonjour!"
