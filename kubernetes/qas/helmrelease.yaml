@@ -23,7 +23,7 @@ spec:
     replicaCount: 2
     image:
       repository: "acrjdlsharedpoc01.azurecr.io/argo-test" # {"$imagepolicy": "argo-test-qas:argo-test-qas:name"}
-      tag: "1.0.0" # {"$imagepolicy": "argo-test-qas:argo-test-qas:tag"}
+      tag: "1.1.0" # {"$imagepolicy": "argo-test-qas:argo-test-qas:tag"}
       pullPolicy: Always
     serviceAccount:
       create: true
@@ -55,14 +55,12 @@ spec:
       requests:
         cpu: 100m
         memory: 128Mi
-
     autoscaling:
       enabled: true
       minReplicas: 2
       maxReplicas: 5
       targetCPUUtilizationPercentage: 75
       targetMemoryUtilizationPercentage: 75
-
     tolerations:
       - key: CriticalAddonsOnly
         operator: Equal
