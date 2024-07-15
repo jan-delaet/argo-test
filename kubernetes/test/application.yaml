@@ -23,7 +23,8 @@ spec:
     namespace: argo-test-test
     server: https://kubernetes.default.svc
   ignoreDifferences:
-    - kind: "*"
-      group: "*"
+    - group: "*"
+      kind: "*"
       jqPathExpressions:
-        - .metadata.labels | select(.key == "helm.sh/release-time")
+        - .metadata.labels."helm.sh/release-date"
+        - .metadata.labels."helm.sh/release-time"
