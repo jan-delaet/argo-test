@@ -31,7 +31,7 @@ spec:
         {{ end -}}
         {{ end -}}
     push:
-      branch: main
+      branch: test
   interval: 1m0s
   sourceRef:
     kind: GitRepository

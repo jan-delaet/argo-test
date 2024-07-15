@@ -19,14 +19,14 @@ ingress:
   enabled: true
   className: nginx-pub
   hosts:
-    - host: argo-test.dev.delaet.dev
+    - host: argo-test.test.delaet.dev
       paths:
         - path: /
           pathType: Prefix
   tls:
-    - secretName: argo-test-dev-delaet-dev-tls
+    - secretName: argo-test-test-delaet-dev-tls
       hosts:
-        - argo-test.dev.delaet.dev
+        - argo-test.test.delaet.dev
 resources:
   limits:
     cpu: 100m
