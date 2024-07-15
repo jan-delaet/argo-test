@@ -23,7 +23,7 @@ spec:
     replicaCount: 2
     image:
       repository: "acrjdlsharedpoc01.azurecr.io/argo-test" # {"$imagepolicy": "argo-test-qas:argo-test-qas:name"}
-      tag: "1.2.0" # {"$imagepolicy": "argo-test-qas:argo-test-qas:tag"}
+      tag: "1.2.1" # {"$imagepolicy": "argo-test-qas:argo-test-qas:tag"}
       pullPolicy: Always
     serviceAccount:
       create: true
