@@ -1,0 +1,12 @@
+apiVersion: image.toolkit.fluxcd.io/v1beta2
+kind: ImagePolicy
+metadata:
+  name: argo-test-test
+  namespace: argo-test-test
+spec:
+  imageRepositoryRef:
+    name: argo-test
+    namespace: flux-system
+  policy:
+    semver:
+      range: ">=1.0.0"

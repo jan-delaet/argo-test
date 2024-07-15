@@ -1,0 +1,24 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: argo-test-test
+  namespace: argocd
+spec:
+  project: argo-test-test
+  syncPolicy:
+    syncOptions:
+      - CreateNamespace=true
+  sources:
+    - chart: standard-webapp
+      helm:
+        releaseName: argo-test-test
+        valueFiles:
+          - $gitops/kubernetes/test/values.yaml
+      repoURL: acrjdlsharedpoc01.azurecr.io/helm
+      targetRevision: 1.0.2
+    - repoURL: https://github.com/jan-delaet/argo-test.git
+      targetRevision: main
+      ref: gitops
+  destination:
+    namespace: argo-test-test
+    server: https://kubernetes.default.svc
