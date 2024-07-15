@@ -22,3 +22,8 @@ spec:
   destination:
     namespace: argo-test-test
     server: https://kubernetes.default.svc
+  ignoreDifferences:
+    - kind: "*"
+      group: "*"
+      jqPathExpressions:
+        - .metadata.labels[] | select(.key == "helm.sh/release-time")
