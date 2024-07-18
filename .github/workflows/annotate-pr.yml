@@ -13,14 +13,20 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            const body = `## :white_check_mark: Checklist before requesting a review
-            - [ ] I have read the contributing guidelines
-            - [ ] I have done something else
+            const body = `## :white_check_mark: Pull request checklist
+            - [ ] I have read the [contributing](https://github.com/certeu/m365-assessment-infrastructure/blob/main/CONTRIBUTING.md) guidelines
+            - [ ] I have reviewed my own changes
 
-            ## If you are onboarding, do x, y, z
-            - [ ] I have done x
-            - [ ] I have done y
-            - [ ] I have done z
+            ## Checklist for IaC changes
+            - [ ] I have added documentation for my changes
+            - [ ] I have updated the README where needed
+
+            ## Checklist for constituent onboardings
+            - [ ] I have read the [service onboarding](https://github.com/certeu/m365-assessment-infrastructure/blob/main/docs/operations/service-onboarding.md) documentation
+            - [ ] I have included the associated ITSM ticket number in the PR title
+            - [ ] I have included a link to the ITSM ticket in the PR description
+            - [ ] I have included the relevant information related to the constituent's assessment configuration in the PR description
+
             `
             github.rest.issues.createComment({
               issue_number: context.issue.number,
