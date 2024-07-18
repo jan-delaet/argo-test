@@ -1,0 +1,27 @@
+on:
+  pull_request_target:
+    types: [opened]
+
+jobs:
+  annotate-pr:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Annotate pull request
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const body = `## :white_check_mark: Checklist before requesting a review
+            - [ ] I have read the contributing guidelines
+            - [ ] I have done something else
+
+            ## If you are onboarding, do x, y, z
+            - [ ] I have done x
+            - [ ] I have done y
+            - [ ] I have done z
+            `
+            github.issues.createComment({
+              issue_number: context.issue.number,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              body: body,
+            })
