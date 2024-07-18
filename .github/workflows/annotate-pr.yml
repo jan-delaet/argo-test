@@ -5,6 +5,9 @@ on:
 jobs:
   annotate-pr:
     runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      issues: write
     steps:
       - name: Annotate pull request
         uses: actions/github-script@v7
